@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  knowmap:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: knowmap-ai
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - SECRET_KEY=knowmap-ai-production-secret-key-2026
+      - DATABASE_PATH=/app/data/users.db
+      - FLASK_DEBUG=false
+    volumes:
+      - knowmap_data:/app/data
+    restart: unless-stopped
+
+volumes:
+  knowmap_data:
+    driver: local
